@@ -7,11 +7,22 @@ import helmet from "koa-helmet";
 import KoaBody from "koa-better-body";
 import jwt from "koa-jwt";
 import ip from "ip";
+// import KoaRouter from 'koa-router';
+import { graphqlKoa } from 'apollo-server-koa';
+// const graphqlHTTP = require('koa-graphql');
 const app = new Koa();
 const router = new Router();
 app.use(helmet());
 app.use(Cors());
 app.use(KoaBody());
+
+router.post('/graphql', graphqlKoa({
+    schema: 
+}))
+
+
+app.use(router.routes());
+app.use(router.allowedMethods());
 
 app.listen(3000, ip.address(), () => {
     console.log("node sever is starting!!!!" + ip.address() + "3000");
