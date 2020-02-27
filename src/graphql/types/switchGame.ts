@@ -3,10 +3,9 @@ const SwitchGameType = `
         id: ID!
         pic: String!
         name: String!
-        exchange: Int!
-        rent_price: Number
+        exchange: String
+        rent_price: Int
     }
-
 `;
 
 const SwitchGameQuery = `
