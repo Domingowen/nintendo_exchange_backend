@@ -6,7 +6,7 @@ const CategorySchema = new Schema({
     },
     list: {
         type: Schema.Types.ObjectId,
-        ref: 'SwitchGameModel'
+        ref: 'GameModel'
     }
 
 }, {

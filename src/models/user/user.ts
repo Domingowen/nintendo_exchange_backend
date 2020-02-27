@@ -4,26 +4,30 @@ const UserSchema = new Schema({
     name: {
         type: String
     },
-    hash_password: {
+    password: {
         type: String
     },
     phone: {
         type: String
     },
-    wechat: {
-        type: String
+    wechat: { // basic wechat info
+        type: Object,
     },
-    switch_game: {
-        type: Schema.Types.ObjectId,
-        ref: 'SwitchGameModel'
-    },
-    switch_age: {
-        type: Number
-    },
-    switch_favorite_game: {
-        type: Array
+    share_wechat: [ // can share wechat contact with want to trade user
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'UserModel',
+        }
+    ],
+    trade: [
+        {
+            type: Schema.Type.ObjectId,
+            ref: 'TradeModel'
+        }
+    ],
+    checkOnline: {
+        type: Boolean
     }
-
 }, {
     timestamps: true
 });
