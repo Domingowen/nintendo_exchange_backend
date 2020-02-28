@@ -19,7 +19,7 @@ const UserSchema = new Schema({
             ref: 'UserModel',
         }
     ],
-    trade: [
+    trade: [ // post trade and ecommerce
         {
             type: Schema.Type.ObjectId,
             ref: 'TradeModel'
