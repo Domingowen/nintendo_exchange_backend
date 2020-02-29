@@ -1,24 +1,33 @@
-import {gql} from 'apollo-server';
-import SwitchGame from './switchGame';
-const UserType = gql`
+import { gql } from 'apollo-server';
+export default gql`
     type User{
-        id : ID
-        name : String
+        id: ID
+        name: String
         phone: Int
-        wechat: {}
-        share_wechat: []
-        trade: []
+        wechat: [User.wechat]
+        share_wechat: User.share_wechat
+        trade: User.trade
         checkOnline: Boolean
-        created_at  : String
-        updated_at  : String
+        created_at: String
+        updated_at: String
     }
-    
+    type Token{
+        token: String!
+        user_info: User
+    }
+    input loginParameter {
+        username: String,
+        password: String,
+    }
+    input registerParameter {
+        username: String,
+        password: String,
+        phone: String
+    }
     type Query {
-        getUserInfo: User
+        login(loginParameter: loginParameter): Token
     }
     type Mutation {
-        login(post: userInput):User
+        register(registerParameter: registerParameter): User
     }
-    
 `;
-export default UserType;

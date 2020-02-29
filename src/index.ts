@@ -15,48 +15,41 @@ import { graphql, buildSchema } from "graphql";
 import KoaBodyParser from 'koa-bodyparser';
 import routerCombine from './route/index';
 import mongodb from './mongodb/index';
+import UserType from './graphql/types/user';
+import UserResolves from './graphql/resolvers/user'
+// console.log(UserType)
+console.log(UserResolves)
 // const graphqlHTTP = require('koa-graphql');
 const app = new Koa();
 // const router = new Router();
 mongodb();
-// const resolvers = {
-//     Query: {
-//         hello: () => "Hello world!"
-//     }
-// };
-const typeDefs = gql`
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
+// const typeDefs = gql`
+//   # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
 
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    id: ID!
-    title: String!
-    author: String!
-  }
+//   # This "Book" type defines the queryable fields for every book in our data source.
+//   type Book {
+//     title: String
+//     author: String
+//   }
 
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: Book
-  }
-`;
-const resolvers = {
-    Query: {
-        books: () => {
-            return {
-                title: 'domingo self',
-                
-            }
-        },
-    },
-};
+//   # The "Query" type is special: it lists all of the available queries that
+//   # clients can execute, along with the return type for each. In this
+//   # case, the "books" query returns an array of zero or more Books (defined above).
+//   type Query {
+//     books: [Book]
+//   }
+// `;
 
 app.use(helmet());
 app.use(Cors());
 app.use(KoaBodyParser());
 
-const server = new ApolloServer({ typeDefs, resolvers, playground: true, introspection: true });
+const server = new ApolloServer({ 
+    typeDefs: UserType,
+    resolvers: UserResolves,
+    playground: true, 
+    introspection: true 
+});
 server.applyMiddleware({ app, path: '/graphql' });
 routerCombine(app);
 // router.post("/graphql", ApolloServer({ typeDefs, resolvers }));
