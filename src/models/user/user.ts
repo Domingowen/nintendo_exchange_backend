@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import {Schema, model} from 'mongoose';
 
 const UserSchema = new Schema({
     name: {
@@ -21,7 +21,7 @@ const UserSchema = new Schema({
     ],
     trade: [ // post trade and ecommerce
         {
-            type: Schema.Type.ObjectId,
+            type: Schema.Types.ObjectId,
             ref: 'TradeModel'
         }
     ],
@@ -31,5 +31,5 @@ const UserSchema = new Schema({
 }, {
     timestamps: true
 });
-const UserModel = Model("UserModel", UserSchema);
-export default UserModel;
+const UserModel = model("UserModel", UserSchema);
+export default UserModel

@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const TradeSchema = new Schema({
     trade_id: {
@@ -37,5 +37,5 @@ const TradeSchema = new Schema({
 }, {
     timestamps: true
 });
-const TradeModel = Model("TradeModel", TradeSchema);
+const TradeModel = model("TradeModel", TradeSchema);
 export default TradeModel;

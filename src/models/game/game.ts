@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const GameSchema = new Schema({
     pic: {
@@ -16,5 +16,5 @@ const GameSchema = new Schema({
 }, {
     timestamps: true
 });
-const GameModel = Model("GameModel", GameSchema);
+const GameModel = model("GameModel", GameSchema);
 export default GameModel;

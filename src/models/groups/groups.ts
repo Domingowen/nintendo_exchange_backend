@@ -1,4 +1,4 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const GroupListSchema = new Schema({
     name: {
@@ -12,5 +12,5 @@ const GroupListSchema = new Schema({
     },
     
 });
-const GroupListModel = Model("GroupListModel", GroupListSchema);
+const GroupListModel = model("GroupListModel", GroupListSchema);
 export default GroupListModel;

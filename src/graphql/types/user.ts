@@ -4,12 +4,22 @@ export default gql`
         id: ID
         name: String
         phone: Int
-        wechat: [User.wechat]
-        share_wechat: User.share_wechat
-        trade: User.trade
+        wechat: wechat
+        share_wechat: share_wechat
+        trade: [trade]
         checkOnline: Boolean
         created_at: String
         updated_at: String
+        getUserInfo(id: String): User
+    }
+    type wechat {
+        name: String
+    }
+    type share_wechat {
+        name: String
+    }
+    type trade {
+        name: String
     }
     type Token{
         token: String!

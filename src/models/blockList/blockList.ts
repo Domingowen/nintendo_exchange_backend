@@ -1,9 +1,9 @@
-import { Schema, Model } from "mongoose";
+import { Schema, model } from "mongoose";
 
 const BlockListSchema = new Schema({
     token: {
         type: String
     }
 });
-const BlockListModel = Model("BlockListModel", BlockListSchema);
+const BlockListModel = model("BlockListModel", BlockListSchema);
 export default BlockListModel;
