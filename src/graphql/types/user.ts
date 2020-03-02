@@ -2,15 +2,14 @@ import { gql } from 'apollo-server';
 export default gql`
     type User{
         id: ID
-        name: String
-        phone: Int
+        username: String
+        phone: Float
         wechat: wechat
         share_wechat: share_wechat
         trade: [trade]
         checkOnline: Boolean
         created_at: String
         updated_at: String
-        getUserInfo(id: String): User
     }
     type wechat {
         name: String
@@ -23,7 +22,7 @@ export default gql`
     }
     type Token{
         token: String!
-        user_info: User
+        data: User
     }
     input loginParameter {
         username: String,
@@ -32,12 +31,12 @@ export default gql`
     input registerParameter {
         username: String,
         password: String,
-        phone: String
+        phone: Float
     }
     type Query {
         login(loginParameter: loginParameter): Token
     }
     type Mutation {
-        register(registerParameter: registerParameter): User
+        register(registerParameter: registerParameter): Token
     }
 `;

@@ -1,14 +1,14 @@
 import {Schema, model} from 'mongoose';
 
 const UserSchema = new Schema({
-    name: {
+    username: {
         type: String
     },
     password: {
         type: String
     },
     phone: {
-        type: String
+        type: Number
     },
     wechat: { // basic wechat info
         type: Object,

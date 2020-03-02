@@ -5,7 +5,7 @@ import Router from "koa-router";
 import Cors from "@koa/cors";
 import helmet from "koa-helmet";
 import KoaBody from "koa-better-body";
-import jwt from "koa-jwt";
+import jwt from "jsonwebtoken";
 import ip from "ip";
 // import KoaRouter from 'koa-router';
 // import { graphqlKoa } from "apollo-server-koa";
@@ -18,6 +18,8 @@ import mongodb from './mongodb/index';
 import UserType from './graphql/types/user';
 import UserResolves from './graphql/resolvers/user'
 import UserModel from './models/user/user';
+import GameModel from './models/game/game';
+// import bodyParser from "koa-bodyparser";
 console.log(UserResolves)
 const app = new Koa();
 mongodb();
@@ -27,11 +29,13 @@ app.use(Cors());
 app.use(KoaBodyParser());
 
 const getUser = async (req) => {
-    const token = req.headers['token'];
-
+    // console.log(req);
+    const token = req.headers['authorization'];
+    console.log(token, 'token');
     if (token) {
         try {
-            return await jwt.verify(token, 'riddlemethis');
+            const NintendoPublicKey = './certificate/Nintendo.pub';
+            return await jwt.verify(token, NintendoPublicKey);
         } catch (e) {
             throw new AuthenticationError('Your session expired. Sign in again.');
         }
@@ -42,23 +46,24 @@ const getUser = async (req) => {
 const server = new ApolloServer({
     typeDefs: UserType,
     resolvers: UserResolves,
-    rootValue: (value) => {
-        // console.log(value) 
-    },
-    context: ({ ctx }) => {
-        // console.log(ctx.req.headers, 'req');
+    rootValue: (value) => {},
+    context:async({ ctx }) => {
+        console.log(ctx, 'ctx');
+        const tokenAuth = await getUser(ctx.req); // token auth
         return {
             ctx,
             models: {
-                UserModel
+                UserModel,
+                GameModel
             }
         }
 
     },
     playground: true,
     introspection: true,
+    tracing: false,
 });
-server.applyMiddleware({ app, path: '/graphql' });
+server.applyMiddleware({ app, path: '/graphql'});
 routerCombine(app);
 // router.post("/graphql", ApolloServer({ typeDefs, resolvers }));
 // router.get("/graphql", ApolloServer({ schema: myGraphQLSchema }));
