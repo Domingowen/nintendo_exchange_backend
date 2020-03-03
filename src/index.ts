@@ -48,7 +48,7 @@ const server = new ApolloServer({
     resolvers: UserResolves,
     rootValue: (value) => {},
     context:async({ ctx }) => {
-        console.log(ctx, 'ctx');
+        // console.log(ctx, 'ctx');
         const tokenAuth = await getUser(ctx.req); // token auth
         return {
             ctx,
