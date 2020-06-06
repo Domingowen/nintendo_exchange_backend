@@ -18,7 +18,7 @@
     "@types/node": "^13.7.4",
     "add": "^2.0.6",
     "apollo-server": "^2.10.1",
-    "apollo-server-koa": "^2.10.1",
+    "apollo-server-koa": "^2.14.2",
     "bcrypt": "^4.0.0",
     "graphql": "^14.6.0",
     "graphql-tools": "^4.0.7",
